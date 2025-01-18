@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    /* Używamy flexboxa */
+    justify-content: center;
+    /* Wyśrodkowanie poziome */
+    align-items: center;
+    /* Wyśrodkowanie pionowe */
+    height: 100vh;
+    /* Wysokość strony na 100% widocznej części ekranu */
+    margin: 0;
+    /* Usuwa domyślne marginesy */
+}
+
+.link {
+    text-decoration: none;
+    color: #4CAF50;
+    /* Kolor tekstu */
+    transition: all 0.3s ease;
+    /* Płynna zmiana stylu przez 0.3 sekundy */
+}
+
+
+
+.link:hover {
+    color: #ff333d;
+    /* Zmieniamy kolor tekstu */
+    transform: scale(1.0);
+    /* Powiększamy nagłówek */
+    cursor: pointer;
+    /* Zmieniamy kursor na wskaźnik (ręka) */
+}
+
+.red {
+    color: #ff333d;
+}
+
+.green {
+    color: green;
+}
+
+.orange {
+    color: orange;
+}
+
+p {
+    user-select: none;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+    /* Dodaje odstęp między h1 a p */
+}
