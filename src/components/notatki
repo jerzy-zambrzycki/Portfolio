@@ -1,0 +1,16 @@
+// () Używamy w 3 sytuacjach :
+// 1. kiedy definiujemy nowa funkcje
+// FUNKCJE możemy denifniować na trzy sposoby :
+// Function nazwaFunkcji(argumentyFunkcji) // funkcja nazwana
+// Przykład funkcji strzałkowej (argumentFunkcji1, argumentFunkcji2) =>{ciałoFunkcji} 
+// Drugi Przykłd z funkcji strzałkowej - (liczba1, liczba2) => liczba1+liczba2 // zwraca wynik dwóch liczb albo stringów, tablicy itp. 
+
+
+
+
+// Restaurant products cost dashboard
+// 1. Wykres - chartdata zmianiamy labels na to żeby odpowiadał unikalnym nazwom produktów,
+// Bedziemy mieli 1 dataset i data w datasecie to będą łączne koszta dla danych produktów
+// 2.Statystyki(paragony) - zmmieniamy wszystkie nazwy na produkty
+// 3.Produkt - dodawnie/edycja (dodanie pola na cene jednostokową)
+// 

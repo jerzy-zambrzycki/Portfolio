@@ -1,28 +1,22 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app dark>
+    <!-- Renderowanie komponentu HomeworkComponent w głównym widoku -->
+    <HomeworkComponent :title="'Product Dashboard'" :subtitle="'Previous month'" />
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// Importowanie komponentu HomeworkComponent
+import HomeworkComponent from './components/HomeworkComponent.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HomeworkComponent,
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+/* Jeśli potrzebujesz, możesz tu dodać dodatkowe style */
 </style>
