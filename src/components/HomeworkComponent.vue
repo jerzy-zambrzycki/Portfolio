@@ -4,88 +4,83 @@
     <v-container>
       <v-row>
         <v-col cols="12" md="7">
-          <v-card class="title-card" outlined>
-            <v-card-title>{{ title }}</v-card-title>
+          <v-card class="title-card modern-card" outlined>
+            <v-card-title class="headline white--text">{{ title }}</v-card-title>
             <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
           </v-card>
         </v-col>
       </v-row>
 
-      <!-- Układ productystyk po lewej stronie, artykuł po prawej -->
+      <!-- Układ produktów po lewej stronie, artykuł po prawej -->
       <v-row>
-        <!-- Kolumna dla productystyk -->
-        <v-col cols="12" md="5">
-          <v-card class="products">
-            <v-card-actions class="d-flex justify-end">
-              <v-btn @click="addNewProductDialog = true"
-                >Add new product +</v-btn
-              >
-            </v-card-actions>
-            <v-card
-              class="ma-3 pa-1 d-flex justify-space-between align-center"
-              v-for="product in products"
-              :key="product.id"
-            >
-              <div class="d-flex align-center">
-                <v-card height="100%" class="ma-1 pa-1">{{
-                  product.name
-                }}</v-card>
-                <v-card height="100%" class="ma-1 pa-1">
-                  count: {{ product.count }}</v-card
-                >
-                <v-card height="100%" class="ma-1 pa-1">
-                  price: {{ product.price }}$</v-card
-                >
-                <v-card height="100%" class="ma-1 pa-1">
-                  total: {{ product.price * product.count }}$</v-card
-                >
-              </div>
-              <div>
-                <v-btn @click="openEditDialog(product)">Edit</v-btn>
-                <v-btn color="error" @click="removeProduct(product.id)"
-                  >Delete</v-btn
-                >
-              </div>
-            </v-card>
+        <!-- Kolumna dla produktów -->
+        <v-col cols="10" md="5">
+  <v-card class="products light-card">
+    <v-card-actions class="d-flex justify-end">
+      <v-btn @click="addNewProductDialog = true">Add new product +</v-btn>
+    </v-card-actions>
 
-            <!-- Przycisk Show in Diagram (productyczny) -->
-            <!-- <v-card-actions class="d-flex justify-end">
-              <v-btn @click="openChartWindow">Show in diagram</v-btn>
-            </v-card-actions> -->
+    <!-- Kontener dla listy produktów, który ma stałą wysokość i suwak -->
+    <v-card class="product-list">
+      <v-card
+        class="ma-3 pa-2 d-flex justify-space-between align-center product-card"
+        v-for="product in products"
+        :key="product.id"
+      >
+        <div class="d-flex align-center">
+          <v-card class="pa-2 mx-1">{{ product.name }}</v-card>
+          <v-card class="pa-2 mx-1">count: {{ product.count }}</v-card>
+          <v-card class="pa-2 mx-1">price: {{ product.price }}$</v-card>
+          <v-card class="pa-2 mx-1">
+            total: {{ product.price * product.count }}$
           </v-card>
-        </v-col>
+        </div>
+        <div>
+          <v-btn @click="openEditDialog(product)">Edit</v-btn>
+          <v-btn color="error" @click="removeProduct(product.id)">Delete</v-btn>
+        </div>
+      </v-card>
+    </v-card>
+  </v-card>
+</v-col>
 
-        <!-- Kolumna dla wykresu (Diagram) -->
-        <v-col cols="12" md="7">
-          <v-card class="chart-card">
-            <v-card-title>Diagram</v-card-title>
-            <v-card-text style="min-height: 200px">
-              <Pie :data="chartData" :options="chartOptions" />
-            </v-card-text>
-          </v-card>
-        </v-col>
+
+
+       <!-- Kolumna dla wykresu (Diagram) -->
+<v-col cols="12" md="7">
+  <v-card class="chart-card" outlined>
+    <v-card-title class="headline">Diagram</v-card-title>
+    <v-card-text style="min-height: 200px">
+      <Pie :data="chartData" :options="chartOptions" />
+    </v-card-text>
+  </v-card>
+</v-col>
+
 
         <!-- Kolumna dla artykułu po prawej stronie -->
-        <v-col cols="12" md="">
-          <v-card
-            class="article-container"
-            v-if="article && article.title && article.text"
-          >
-            <v-card-title>{{ article.title }}</v-card-title>
-            <v-card-text>{{ article.text }}</v-card-text>
-          </v-card>
+         
+        <!-- Kolumna dla artykułu -->
+        <v-col cols="12" md="6" class="position-relative">
+        <v-card class="article-container" v-if="article && article.title && article.text">
+          <v-card-title>{{ article.title }}</v-card-title>
+          <v-card-text>{{ article.text }}</v-card-text>
+        </v-card>
 
-          <!-- Jeśli brak artykułu -->
-          <v-card v-else>
-            <v-card-text>
-              <p>Brak artykułu do wyświetlenia.</p>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+        <!-- Jeśli brak artykułu -->
+        <v-card v-else class="no-article">
+          <v-card-text>
+            <p>Brak artykułu do wyświetlenia.</p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 
-    <!-- Dialog dodawania nowej productystyki -->
+
+
+    
+
+    <!-- Dialog dodawania nowego produktu -->
     <v-dialog v-model="addNewProductDialog" width="600">
       <v-card width="100%" height="100%">
         <v-card-title class="d-flex justify-center"
@@ -178,8 +173,8 @@ export default {
     article: {
       type: Object,
       default: () => ({
-        title: "Brak tytułu",
-        text: "Brak treści",
+        title: "Monthly Cost Summary",
+        text: "Here will be a list of expenses for the current month."
       }),
     },
   },
@@ -205,7 +200,7 @@ export default {
       //   labels: [],
       //   datasets: [
       //     {
-      //       label: "Products",
+      //       label: "Products",y
       //       data: [],
       //       backgroundColor: ["#42A5F5", "#66BB6A", "#FF7043"],
       //       hoverBackgroundColor: ["#42A5F5", "#66BB6A", "#FF7043"],
@@ -226,8 +221,22 @@ export default {
           {
             label: "Products",
             data: [],
-            backgroundColor: ["#42A5F5", "#66BB6A", "#FF7043"],
-            hoverBackgroundColor: ["#42A5F5", "#66BB6A", "#FF7043"],
+            backgroundColor: [
+              "#42A5F5",
+              "#66BB6A",
+              "#FF7043",
+              "#FFC107",
+              "#8E24AA",
+              "#00BCD4",
+            ],
+            hoverBackgroundColor: [
+              "#42A5F5",
+              "#66BB6A",
+              "#FF7043",
+              "#FFC107",
+              "#8E24AA",
+              "#00BCD4",
+            ],
           },
         ],
       };
@@ -309,7 +318,7 @@ export default {
         await db.collection("products").add(newProduct);
         // newProduct.id = docRef.id; // Dodajemy id dokumentu
 
-        // // Dodanie nowej productystyki lokalnie, aby natychmiast pojawiła się na ekranie - TO ZA NAS ROBI ONSNAPSHOT
+        // // Dodanie nowej produktówi lokalnie, aby natychmiast pojawiła się na ekranie - TO ZA NAS ROBI ONSNAPSHOT
         // this.products.push(newProduct);
 
         // // Zaktualizowanie wykresu
@@ -321,7 +330,7 @@ export default {
         this.newProductPrice = 0;
         this.addNewProductDialog = false;
       } catch (error) {
-        console.error("Błąd przy dodawaniu nowej productystyki:", error);
+        console.error("Błąd przy dodawaniu nowej produktówi:", error);
       }
     },
 
@@ -340,7 +349,7 @@ export default {
         // this.updateChartData(); // Zaktualizowanie wykresu po usunięciu
         console.log(`Product o id ${productId} została usunięta.`);
       } catch (error) {
-        console.error("Błąd przy usuwaniu productystyki:", error);
+        console.error("Błąd przy usuwaniu produktówi:", error);
       }
     },
 
@@ -391,26 +400,212 @@ export default {
 </script>
 
 <style scoped>
-/* Stylowanie dla tła */
+/* Styl nagłówka */
+/* Styl nagłówka */
 .title-card {
   background-color: #333;
   color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Cień dla głębi */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Wyrównanie kart */
+.title-card:hover {
+  transform: translateY(-5px); /* Mała animacja na hover */
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3); /* Większy cień na hover */
+}
+
+/* Styl kontenera produktów */
+/* Styl dla kontenera z suwakami */
 .products {
-  background-color: #333;
+  background-color: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  transition: background-color 0.3s ease;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Stylizacja suwaka dla WebKit (Chrome, Safari, Opera) */
+.products::-webkit-scrollbar {
+  width: 8px; /* Szerokość suwaka - zmniejszono do 8px, co daje "krótszy" wygląd */
+}
+
+.products::-webkit-scrollbar-track {
+  background-color: #e0e0e0; /* Kolor tła ścieżki suwaka */
+  border-radius: 6px;
+}
+
+.products::-webkit-scrollbar-thumb {
+  background-color: #9e9e9e; /* Kolor suwaka - szary */
+  border-radius: 6px;
+  height: 50px; /* Wysokość suwaka - zmniejszono do połowy poprzedniej */
+  border: 3px solid #e0e0e0; /* Border wokół suwaka */
+  transition: background-color 0.3s ease; /* Dodanie płynnej zmiany koloru */
+}
+
+.products::-webkit-scrollbar-thumb:hover {
+  background-color: #757575; /* Kolor suwaka po najechaniu myszką */
+}
+
+/* Stylizowanie suwaka w Firefox */
+.products {
+  scrollbar-width: thin; /* Cienki suwak */
+  scrollbar-color: #9e9e9e #e0e0e0; /* Kolor suwaka i tła - szary suwak */
+}
+
+/* Styl pojedynczego produktu */
+.product-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Styl informacji o produkcie */
+.product-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.product-detail {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styl przycisków */
+.add-btn,
+.edit-btn,
+.delete-btn {
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  
+}
+
+.add-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Kolory przycisków */
+.add-btn {
+  background-color: #42a5f5;
   color: white;
 }
 
-.article-container {
-  background-color: #121212;
+.add-btn:hover {
+  background-color: #2196f3;
+}
+
+.edit-btn {
+  background-color: #26a69a;
   color: white;
+}
+
+.edit-btn:hover {
+  background-color: #00796b;
+}
+
+.delete-btn {
+  background-color: #ff7043;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #f4511e;
 }
 
 .chart-card {
-  background-color: #333;
-  color: white;
-  min-height: 300px;
+  background-color: #ffffff; /* Tło białe, by pasowało do reszty projektu */
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+.chart-card:hover {
+  transform: translateY(-5px); /* Animacja na hover */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Większy cień na hover */
+}
+
+.v-card-title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #333; /* Kolor tekstu tytułu */
+}
+
+.v-card-text {
+  padding: 0;
+  min-height: 200px; /* Zapewnia minimalną wysokość wykresu */
+}
+
+/* Stylizacja samej karty artykułu */
+.article-container {
+  background-color: #ffffff; /* Białe tło */
+  border-radius: 16px; /* Zaokrąglone rogi */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Cień */
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacja */
+}
+
+/* Dodanie animacji na hover */
+.article-container:hover {
+  transform: translateY(-5px); /* Podniesienie karty */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* Większy cień na hover */
+}
+
+/* Styl tytułu artykułu */
+.article-title {
+  font-size: 24px; /* Większy rozmiar czcionki */
+  font-weight: bold;
+  color: #333; /* Ciemny kolor tekstu */
+  margin-bottom: 10px;
+}
+
+/* Styl tekstu artykułu */
+.article-text {
+  font-size: 16px; /* Rozmiar czcionki */
+  line-height: 1.6; /* Wysokość linii dla lepszej czytelności */
+  color: #555; /* Jaśniejszy odcień szarości */
+}
+
+/* Stylizacja karty, gdy brak artykułu */
+.no-article {
+  background-color: #f4f6f8; /* Jasnoszare tło */
+  border-radius: 16px; /* Zaokrąglone rogi */
+  padding: 20px;
+  text-align: center; /* Wyśrodkowanie tekstu */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Cień */
+}
+
+.no-article p {
+  font-size: 18px; /* Większy rozmiar czcionki */
+  color: #888; /* Szary kolor tekstu */
+}
+
+
+
+
 </style>
