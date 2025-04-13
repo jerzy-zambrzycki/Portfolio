@@ -174,7 +174,7 @@ export default {
       type: Object,
       default: () => ({
         title: "Monthly Cost Summary",
-        text: "Here will be a list of expenses for the current month."
+        text: "Here will be a list of expenses for the current month.lol"
       }),
     },
   },
